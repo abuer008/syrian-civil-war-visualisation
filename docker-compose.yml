@@ -1,0 +1,22 @@
+version: '3'
+services:
+  nodejs-server:
+    build:
+      context: ./server
+    ports:
+      - "8080:8080"
+    container_name: server-api
+    env_file: .env
+    volumes:
+      - ./server:/usr/src/app/server
+      - /usr/src/app/server/node_modules
+  visualisation-ui:
+    build:
+      context: ./front-end-application
+    ports:
+      - "80:80"
+    container_name: visualisation-ui
+    stdin_open: true
+    volumes:
+      - ./front-end-application:/usr/src/app/ui
+      - /usr/src/app/front-end-ui/node_modules
